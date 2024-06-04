@@ -1191,11 +1191,11 @@ static int jpc_dec_process_siz(jpc_dec_t *dec, jpc_ms_t *ms)
 		cmpt->sgnd = siz->comps[compno].sgnd;
 		cmpt->hstep = siz->comps[compno].hsamp;
 		cmpt->vstep = siz->comps[compno].vsamp;
+	  if (((int)siz->xoff<0)||((int)dec->xend<0)||((int)siz->yoff<0)||((int)dec->yend<0)) {
+      		return -1;
+  		}
 		cmpt->width = JPC_CEILDIV(dec->xend, cmpt->hstep) -
 		  JPC_CEILDIV(dec->xstart, cmpt->hstep);
-		  if (((int)siz->xoff<0)||((int)dec->xend<0)||((int)siz->yoff<0)||((int)dec->yend<0)) {
-      		return -1;
-  }
 		cmpt->height = JPC_CEILDIV(dec->yend, cmpt->vstep) -
 		  JPC_CEILDIV(dec->ystart, cmpt->vstep);
 		cmpt->hsubstep = 0;
